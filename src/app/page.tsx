@@ -93,7 +93,7 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="flex-1">
+      <main>
         <section className="relative py-20 md:py-32">
           <div
             aria-hidden="true"
