@@ -109,10 +109,6 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
         </SidebarContent>
         <SidebarFooter>
            <div className="flex items-center gap-3 p-2">
-            <Avatar>
-              <AvatarImage src="https://picsum.photos/100" alt="User avatar" data-ai-hint="person face" />
-              <AvatarFallback>VV</AvatarFallback>
-            </Avatar>
           </div>
         </SidebarFooter>
       </Sidebar>
