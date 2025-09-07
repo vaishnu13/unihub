@@ -113,7 +113,10 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
         <header className="flex h-16 items-center gap-4 border-b bg-background px-6">
             <SidebarTrigger className="md:hidden"/>
             <div className="flex-1" />
-             <div className="flex items-center gap-2">
+            <div className="flex-1 text-center">
+              <h1 className="text-xl font-semibold">Hello, Vaishnu Vindula</h1>
+            </div>
+             <div className="flex flex-1 justify-end items-center gap-2">
                 <Button variant="ghost" size="icon" onClick={toggleTheme}>
                     {isDarkMode ? <Sun /> : <Moon />}
                 </Button>
