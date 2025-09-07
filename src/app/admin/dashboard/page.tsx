@@ -1,10 +1,29 @@
 'use client'
 
+import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { Users, GraduationCap, Building, FileText, MoreHorizontal, UserPlus } from "lucide-react";
+import { Users, GraduationCap, Building, FileText, MoreHorizontal, UserPlus, Trash2 } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
 
 const statCards = [
     { title: "Total Users", value: "3", description: "All registered users", icon: <Users className="h-5 w-5 text-muted-foreground" /> },
@@ -13,13 +32,25 @@ const statCards = [
     { title: "Companies", value: "0", description: "Company accounts", icon: <Building className="h-5 w-5 text-muted-foreground" /> },
 ];
 
-const users = [
+const initialUsers = [
     { name: "vaishnu vindula", email: "vaishnu7070@gmail.com", role: "student" },
     { name: "Manaswini K", email: "manukommanapalli@gmail.com", role: "student" },
     { name: "vaishnu vindula", email: "admin@unihub.com", role: "admin" },
-]
+];
+
+type User = {
+    name: string;
+    email: string;
+    role: "student" | "admin" | "college" | "company";
+}
 
 export default function AdminDashboardPage() {
+    const [users, setUsers] = useState<User[]>(initialUsers);
+
+    const deleteUser = (email: string) => {
+        setUsers(users.filter(user => user.email !== email));
+    }
+
   return (
     <div className="space-y-8">
       <div className="flex justify-between items-center">
@@ -67,11 +98,47 @@ export default function AdminDashboardPage() {
                                     <p className="text-sm text-muted-foreground">{user.email}</p>
                                 </div>
                                 <Badge variant={user.role === 'admin' ? 'default' : 'secondary'} className="capitalize">{user.role}</Badge>
-                                <Button variant="ghost" size="icon">
-                                    <MoreHorizontal className="h-4 w-4" />
-                                </Button>
+                                <DropdownMenu>
+                                    <DropdownMenuTrigger asChild>
+                                        <Button variant="ghost" size="icon">
+                                            <MoreHorizontal className="h-4 w-4" />
+                                        </Button>
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent align="end">
+                                        <AlertDialog>
+                                            <AlertDialogTrigger asChild>
+                                                <DropdownMenuItem onSelect={(e) => e.preventDefault()} className="text-destructive focus:bg-destructive/10 focus:text-destructive">
+                                                    <Trash2 className="mr-2 h-4 w-4" />
+                                                    Delete User
+                                                </DropdownMenuItem>
+                                            </AlertDialogTrigger>
+                                            <AlertDialogContent>
+                                                <AlertDialogHeader>
+                                                <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                                                <AlertDialogDescription>
+                                                    This action cannot be undone. This will permanently delete the user account.
+                                                </AlertDialogDescription>
+                                                </AlertDialogHeader>
+                                                <AlertDialogFooter>
+                                                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                                <AlertDialogAction
+                                                    onClick={() => deleteUser(user.email)}
+                                                    className="bg-destructive hover:bg-destructive/90 text-destructive-foreground"
+                                                >
+                                                    Delete
+                                                </AlertDialogAction>
+                                                </AlertDialogFooter>
+                                            </AlertDialogContent>
+                                        </AlertDialog>
+                                    </DropdownMenuContent>
+                                </DropdownMenu>
                             </div>
                         ))}
+                         {users.length === 0 && (
+                            <div className="text-center text-muted-foreground py-8">
+                                No users found.
+                            </div>
+                        )}
                     </div>
                 </CardContent>
             </Card>
