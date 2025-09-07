@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Logo } from '@/components/logo';
-import { Gauge, Sparkles, Briefcase, BookOpen, Bot, MessageSquare, GraduationCap, Building, UserCheck } from 'lucide-react';
+import { Gauge, Sparkles, Briefcase, BookOpen, Bot, MessageSquare, GraduationCap, Building, UserCheck, User } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 const features = [
@@ -215,10 +215,9 @@ export default function Home() {
                 <div className="mt-16 flex justify-center">
                     <Card className="w-full max-w-xs text-center">
                         <CardContent className="p-6">
-                            <Avatar className="h-24 w-24 mx-auto mb-4">
-                                <AvatarImage src="https://picsum.photos/200" data-ai-hint="person face"/>
-                                <AvatarFallback>VV</AvatarFallback>
-                            </Avatar>
+                             <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-secondary">
+                                <User className="h-12 w-12 text-muted-foreground" />
+                            </div>
                             <h3 className="text-lg font-bold font-headline">Vaishnu Vindula</h3>
                             <p className="text-sm text-muted-foreground">Founder</p>
                         </CardContent>
