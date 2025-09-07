@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -23,6 +23,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import type { UserRecord } from "firebase-admin/auth";
 
 
 const statCards = [
@@ -32,12 +33,6 @@ const statCards = [
     { title: "Companies", value: "0", description: "Company accounts", icon: <Building className="h-5 w-5 text-muted-foreground" /> },
 ];
 
-const initialUsers = [
-    { name: "vaishnu vindula", email: "vaishnu7070@gmail.com", role: "student" },
-    { name: "Manaswini K", email: "manukommanapalli@gmail.com", role: "student" },
-    { name: "vaishnu vindula", email: "admin@unihub.com", role: "admin" },
-];
-
 type User = {
     name: string;
     email: string;
@@ -45,10 +40,36 @@ type User = {
 }
 
 export default function AdminDashboardPage() {
-    const [users, setUsers] = useState<User[]>(initialUsers);
+    const [users, setUsers] = useState<UserRecord[]>([]);
+    const [loading, setLoading] = useState(true);
 
-    const deleteUser = (email: string) => {
-        setUsers(users.filter(user => user.email !== email));
+    async function fetchUsers() {
+        try {
+            const response = await fetch('/api/users');
+            if (!response.ok) {
+                throw new Error('Failed to fetch users');
+            }
+            const data = await response.json();
+            setUsers(data.users);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        fetchUsers();
+    }, []);
+
+
+    const deleteUser = async (uid: string) => {
+        try {
+            await fetch(`/api/users/${uid}`, { method: 'DELETE' });
+            setUsers(users.filter(user => user.uid !== uid));
+        } catch (error) {
+            console.error("Failed to delete user", error);
+        }
     }
 
   return (
@@ -65,7 +86,7 @@ export default function AdminDashboardPage() {
                     {card.icon}
                 </CardHeader>
                 <CardContent>
-                    <div className="text-2xl font-bold">{card.value}</div>
+                    <div className="text-2xl font-bold">{card.title === 'Total Users' ? users.length : card.value}</div>
                     <p className="text-xs text-muted-foreground">{card.description}</p>
                 </CardContent>
             </Card>
@@ -81,7 +102,7 @@ export default function AdminDashboardPage() {
                 </CardHeader>
                 <CardContent>
                     <div className="flex justify-end mb-4">
-                        <Button>
+                        <Button disabled>
                             <UserPlus className="mr-2 h-4 w-4" /> Create User
                         </Button>
                     </div>
@@ -91,16 +112,18 @@ export default function AdminDashboardPage() {
                             <span>Role</span>
                             <span>Actions</span>
                         </div>
-                        {users.map(user => (
-                             <div key={user.email} className="grid grid-cols-[1fr_auto_auto] items-center gap-4 px-4 py-3 border rounded-lg">
+                        {loading ? <p>Loading users...</p> : users.map(user => (
+                             <div key={user.uid} className="grid grid-cols-[1fr_auto_auto] items-center gap-4 px-4 py-3 border rounded-lg">
                                 <div>
-                                    <p className="font-medium capitalize">{user.name}</p>
+                                    <p className="font-medium capitalize">{user.displayName || user.email}</p>
                                     <p className="text-sm text-muted-foreground">{user.email}</p>
                                 </div>
-                                <Badge variant={user.role === 'admin' ? 'default' : 'secondary'} className="capitalize">{user.role}</Badge>
+                                <Badge variant={user.email === 'admin@unihub.com' ? 'default' : 'secondary'} className="capitalize">
+                                    {user.email === 'admin@unihub.com' ? 'admin' : 'student'}
+                                </Badge>
                                 <DropdownMenu>
                                     <DropdownMenuTrigger asChild>
-                                        <Button variant="ghost" size="icon">
+                                        <Button variant="ghost" size="icon" disabled={user.email === 'admin@unihub.com'}>
                                             <MoreHorizontal className="h-4 w-4" />
                                         </Button>
                                     </DropdownMenuTrigger>
@@ -122,7 +145,7 @@ export default function AdminDashboardPage() {
                                                 <AlertDialogFooter>
                                                 <AlertDialogCancel>Cancel</AlertDialogCancel>
                                                 <AlertDialogAction
-                                                    onClick={() => deleteUser(user.email)}
+                                                    onClick={() => deleteUser(user.uid)}
                                                     className="bg-destructive hover:bg-destructive/90 text-destructive-foreground"
                                                 >
                                                     Delete
@@ -134,7 +157,7 @@ export default function AdminDashboardPage() {
                                 </DropdownMenu>
                             </div>
                         ))}
-                         {users.length === 0 && (
+                         {users.length === 0 && !loading && (
                             <div className="text-center text-muted-foreground py-8">
                                 No users found.
                             </div>
