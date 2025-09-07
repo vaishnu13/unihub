@@ -11,7 +11,6 @@ import { GridTrail } from '@/components/GridTrail';
 import { cn } from '@/lib/utils';
 import React from 'react';
 import { AnimatedHeading } from '@/components/animated-heading';
-import { ParticleTrail } from '@/components/ParticleTrail';
 
 
 const features = [
@@ -132,7 +131,7 @@ export default function Home() {
 
       <main className='flex-1'>
         <section className="relative py-20 md:py-32 overflow-hidden">
-          <ParticleTrail />
+          <GridTrail />
           <div className="container text-center relative z-10">
             <AnimatedHeading text="Your Bridge to a Successful Career" className="font-headline text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl" />
             <p className="mt-6 max-w-2xl mx-auto text-lg text-muted-foreground md:text-xl">
