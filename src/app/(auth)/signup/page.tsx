@@ -1,4 +1,9 @@
+'use client';
+
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useUser } from "@/context/UserContext";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -20,8 +25,56 @@ import {
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Eye } from 'lucide-react';
 
+const colleges = [
+    { value: "anits", label: "Anil Neerukonda Institute of Technology and Sciences (ANITS)" },
+    { value: "viit", label: "Vignan's Institute of Information Technology (VIIT)" },
+    { value: "view", label: "Vignan's Institute of Engineering for Women" },
+    { value: "raghu", label: "Raghu Engineering College (Autonomous)" },
+    { value: "diet", label: "Dadi Institute of Engineering and Technology (DIET)" },
+    { value: "viet", label: "Visakha Institute of Engineering & Technology (VIET)" },
+    { value: "chaitanya", label: "Chaitanya Engineering College" },
+    { value: "avanthi", label: "Avanthi Institute of Engineering and Technology" },
+    { value: "bits", label: "BABA Institute of Technology and Sciences (BITS)" },
+    { value: "bullayya", label: "Dr. Lankapalli Bullayya College" },
+    { value: "saiganapathi", label: "Sai Ganapathi Engineering College" },
+    { value: "sanketika", label: "Sanketika Vidya Parishad Engineering College" },
+    { value: "giits", label: "Gonna Institute of Information Technology & Sciences (GIITS)" },
+    { value: "nsrit", label: "Nadimpalli Satyanarayana Raju Institute of Technology (NSRIT)" },
+    { value: "alameer", label: "Al Ameer College of Engineering and Information Technology" },
+    { value: "behara", label: "Behara College of Engineering and Technology" },
+];
 
 export default function SignupPage() {
+    const router = useRouter();
+    const { setUser } = useUser();
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        college: '',
+        education: 'btech',
+        password: '',
+    });
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { id, value } = e.target;
+        setFormData(prev => ({ ...prev, [id]: value }));
+    };
+    
+    const handleSelectChange = (value: string) => {
+        setFormData(prev => ({ ...prev, college: value }));
+    };
+
+    const handleRadioChange = (value: string) => {
+        setFormData(prev => ({ ...prev, education: value }));
+    };
+
+    const handleCreateAccount = () => {
+        const collegeLabel = colleges.find(c => c.value === formData.college)?.label || formData.college;
+        setUser({ ...formData, college: collegeLabel });
+        router.push('/dashboard');
+    }
+
   return (
     <Card className="mx-auto max-w-md w-full">
        <CardHeader className="space-y-2">
@@ -36,12 +89,12 @@ export default function SignupPage() {
         <div className="grid gap-4">
           <div className="grid grid-cols-2 gap-4">
             <div className="grid gap-2">
-              <Label htmlFor="first-name">First name</Label>
-              <Input id="first-name" placeholder="Max" required />
+              <Label htmlFor="firstName">First name</Label>
+              <Input id="firstName" placeholder="Max" required onChange={handleInputChange} value={formData.firstName} />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="last-name">Last name</Label>
-              <Input id="last-name" placeholder="Robinson" required />
+              <Label htmlFor="lastName">Last name</Label>
+              <Input id="lastName" placeholder="Robinson" required onChange={handleInputChange} value={formData.lastName} />
             </div>
           </div>
           <div className="grid gap-2">
@@ -51,37 +104,24 @@ export default function SignupPage() {
               type="email"
               placeholder="m@example.com"
               required
+              onChange={handleInputChange}
+              value={formData.email}
             />
           </div>
            <div className="grid gap-2">
             <Label htmlFor="college">Select your College</Label>
-             <Select>
+             <Select onValueChange={handleSelectChange} value={formData.college}>
               <SelectTrigger id="college">
                 <SelectValue placeholder="Select your college" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="anits">Anil Neerukonda Institute of Technology and Sciences (ANITS)</SelectItem>
-                <SelectItem value="viit">Vignan's Institute of Information Technology (VIIT)</SelectItem>
-                <SelectItem value="view">Vignan's Institute of Engineering for Women</SelectItem>
-                <SelectItem value="raghu">Raghu Engineering College (Autonomous)</SelectItem>
-                <SelectItem value="diet">Dadi Institute of Engineering and Technology (DIET)</SelectItem>
-                <SelectItem value="viet">Visakha Institute of Engineering & Technology (VIET)</SelectItem>
-                <SelectItem value="chaitanya">Chaitanya Engineering College</SelectItem>
-                <SelectItem value="avanthi">Avanthi Institute of Engineering and Technology</SelectItem>
-                <SelectItem value="bits">BABA Institute of Technology and Sciences (BITS)</SelectItem>
-                <SelectItem value="bullayya">Dr. Lankapalli Bullayya College</SelectItem>
-                <SelectItem value="saiganapathi">Sai Ganapathi Engineering College</SelectItem>
-                <SelectItem value="sanketika">Sanketika Vidya Parishad Engineering College</SelectItem>
-                <SelectItem value="giits">Gonna Institute of Information Technology & Sciences (GIITS)</SelectItem>
-                <SelectItem value="nsrit">Nadimpalli Satyanarayana Raju Institute of Technology (NSRIT)</SelectItem>
-                <SelectItem value="alameer">Al Ameer College of Engineering and Information Technology</SelectItem>
-                <SelectItem value="behara">Behara College of Engineering and Technology</SelectItem>
+                {colleges.map(c => <SelectItem key={c.value} value={c.value}>{c.label}</SelectItem>)}
               </SelectContent>
             </Select>
           </div>
           <div className="grid gap-2">
             <Label>Education</Label>
-            <RadioGroup defaultValue="btech" className="flex gap-4">
+            <RadioGroup defaultValue={formData.education} onValueChange={handleRadioChange} className="flex gap-4">
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="btech" id="btech" />
                 <Label htmlFor="btech">B.Tech</Label>
@@ -94,11 +134,11 @@ export default function SignupPage() {
           </div>
           <div className="grid gap-2 relative">
             <Label htmlFor="password">Password</Label>
-            <Input id="password" type="password" />
+            <Input id="password" type="password" onChange={handleInputChange} value={formData.password} />
             <Eye className="absolute right-3 top-9 h-5 w-5 text-muted-foreground" />
           </div>
-          <Button type="submit" className="w-full" asChild>
-            <Link href="/dashboard">Create an account</Link>
+          <Button type="submit" className="w-full" onClick={handleCreateAccount}>
+            Create an account
           </Button>
         </div>
         <div className="mt-4 text-center text-sm">

@@ -1,5 +1,6 @@
 'use client'
 
+import { useUser } from "@/context/UserContext";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -28,17 +29,24 @@ const sections = [
 ];
 
 export default function PortfolioPage() {
+    const { user } = useUser();
+
+    const studentName = user ? `${user.firstName} ${user.lastName}` : "Student Name";
+    const avatarFallback = user ? `${user.firstName.charAt(0)}${user.lastName.charAt(0)}` : "SN";
+    const collegeName = user ? user.college : "Your College Name";
+    const educationLevel = user ? (user.education === 'btech' ? 'Bachelor of Technology (B.Tech)' : 'General Degree') : "Your Degree";
+
     return (
         <div className="space-y-8">
             {/* Header */}
             <div className="flex flex-col sm:flex-row items-center gap-6">
                 <Avatar className="h-24 w-24 border-4 border-primary/20">
                     <AvatarImage src="https://picsum.photos/200" data-ai-hint="person face" />
-                    <AvatarFallback>VV</AvatarFallback>
+                    <AvatarFallback>{avatarFallback}</AvatarFallback>
                 </Avatar>
                 <div className="flex-1 text-center sm:text-left">
                     <div className="flex items-center justify-center sm:justify-start gap-2">
-                        <h1 className="text-3xl font-bold font-headline">vaishnu vindula</h1>
+                        <h1 className="text-3xl font-bold font-headline capitalize">{studentName}</h1>
                         <Badge variant="secondary" className="bg-green-100 text-green-800 border-green-200 dark:bg-green-900/50 dark:text-green-300 dark:border-green-800">
                            <CheckCircle className="h-4 w-4 mr-1" />
                            Verified Profile
@@ -72,8 +80,8 @@ export default function PortfolioPage() {
                        <CardTitle className="font-headline text-xl">Education</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <h3 className="font-semibold">Anil Neerukonda Institute of Technology and Sciences (ANITS)</h3>
-                        <p className="text-sm text-muted-foreground">Bachelor of Technology (B.Tech) in Computer Science Engineering (CSE)</p>
+                        <h3 className="font-semibold">{collegeName}</h3>
+                        <p className="text-sm text-muted-foreground">{educationLevel} in Computer Science Engineering (CSE)</p>
                         <p className="text-sm text-muted-foreground">Graduating 3rd Year</p>
                     </CardContent>
                 </Card>

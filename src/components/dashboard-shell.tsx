@@ -3,6 +3,7 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useUser } from '@/context/UserContext';
 
 import {
   SidebarProvider,
@@ -60,17 +61,12 @@ const menuItems = [
 
 export function DashboardShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const { user } = useUser();
   const [isDarkMode, setIsDarkMode] = React.useState(true);
 
   React.useEffect(() => {
     const isDark = document.documentElement.classList.contains('dark');
     setIsDarkMode(isDark);
-    // Set initial theme
-    if (isDark) {
-        document.documentElement.classList.add('dark');
-    } else {
-        document.documentElement.classList.remove('dark');
-    }
   }, []);
 
   const toggleTheme = () => {
@@ -85,6 +81,9 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
 
 
   const isSubMenuActive = (basePath: string) => pathname.startsWith(basePath);
+  
+  const studentName = user ? `${user.firstName} ${user.lastName}` : 'Student';
+  const avatarFallback = user ? `${user.firstName.charAt(0)}${user.lastName.charAt(0)}` : 'S';
 
   return (
     <SidebarProvider>
@@ -96,7 +95,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
           <SidebarMenu>
             {menuItems.map((item) => (
               <SidebarMenuItem key={item.href} className="px-2">
-                <SidebarMenuButton asChild isActive={pathname === item.href} size="lg" className="text-base font-medium">
+                <SidebarMenuButton asChild isActive={pathname.startsWith(item.href)} size="lg" className="text-base font-medium">
                   <Link href={item.href}>
                     <item.icon className="h-5 w-5" />
                     <span>{item.label}</span>
@@ -117,7 +116,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
             <SidebarTrigger className="md:hidden"/>
             <div className="flex-1" />
             <div className="flex-1 text-center">
-              <h1 className="text-xl font-semibold">Hello, Vaishnu Vindula</h1>
+              <h1 className="text-xl font-semibold">Hello, {studentName}</h1>
             </div>
              <div className="flex flex-1 justify-end items-center gap-2">
                 <Button variant="ghost" size="icon" onClick={toggleTheme}>
@@ -132,8 +131,8 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
                     <DropdownMenuTrigger asChild>
                         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
                             <Avatar className="h-9 w-9">
-                                <AvatarImage src="https://picsum.photos/100" alt="@shadcn" data-ai-hint="person face" />
-                                <AvatarFallback>VV</AvatarFallback>
+                                <AvatarImage src="https://picsum.photos/100" alt={studentName} data-ai-hint="person face" />
+                                <AvatarFallback>{avatarFallback}</AvatarFallback>
                             </Avatar>
                          </Button>
                     </DropdownMenuTrigger>
