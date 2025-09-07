@@ -227,9 +227,9 @@ export default function Home() {
         </section>
 
       </main>
-        <div className="fixed bottom-4 right-4 z-50">
-            <Button size="icon" className="rounded-full w-14 h-14 bg-purple-600 hover:bg-purple-700 shadow-lg">
-                <MessageSquare className="h-6 w-6" />
+        <div className="fixed bottom-6 right-6 z-50">
+            <Button size="icon" className="rounded-full w-16 h-16 bg-purple-600 hover:bg-purple-700 shadow-lg">
+                <MessageSquare className="h-8 w-8" />
             </Button>
         </div>
       <footer id="contact" className="border-t">
