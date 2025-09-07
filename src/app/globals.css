@@ -70,3 +70,43 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .glowing-card-container {
+    position: relative;
+  }
+
+  .glowing-card {
+    position: relative;
+    overflow: hidden;
+    background-color: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    transition: all 0.3s ease;
+  }
+
+  .glowing-card-container:hover .glowing-card {
+    border-color: hsl(var(--primary) / 0.5);
+  }
+
+  .glowing-card::before {
+    content: '';
+    position: absolute;
+    top: var(--py, 0);
+    left: var(--px, 0);
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(
+      circle,
+      hsl(var(--primary) / 0.3) 0%,
+      transparent 80%
+    );
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .glowing-card:hover::before {
+    opacity: 1;
+  }
+}

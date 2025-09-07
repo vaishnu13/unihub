@@ -6,6 +6,8 @@ import { Logo } from '@/components/logo';
 import { Gauge, Sparkles, Briefcase, BookOpen, Bot, MessageSquare, GraduationCap, Building, UserCheck, User } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { GridTrail } from '@/components/GridTrail';
+import { cn } from '@/lib/utils';
+
 
 const features = [
   {
@@ -94,7 +96,7 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="flex-1">
+      <main>
         <section className="relative py-20 md:py-32">
           <GridTrail />
           <div className="container text-center relative">
@@ -125,9 +127,9 @@ export default function Home() {
                 Everything you need to go from classroom to career, powered by AI.
               </p>
             </div>
-            <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4 glowing-card-container">
               {features.map((feature) => (
-                <Card key={feature.title} className="text-center">
+                <Card key={feature.title} className="text-center glowing-card">
                   <CardHeader>
                     <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
                       {feature.icon}
@@ -153,10 +155,10 @@ export default function Home() {
                     Tailored dashboards and powerful tools for students, colleges, and companies to thrive in the modern talent landscape.
                 </p>
             </div>
-            <div className="mt-16 grid gap-8 md:grid-cols-3">
+            <div className="mt-16 grid gap-8 md:grid-cols-3 glowing-card-container">
                 {platformUsers.map((user) => (
-                  <Link href={user.href} key={user.title}>
-                    <Card className="h-full">
+                  <Link href={user.href} key={user.title} className="h-full">
+                    <Card className="h-full glowing-card">
                         <CardHeader className="flex flex-row items-center gap-4">
                             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
                                 {user.icon}
