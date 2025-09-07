@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -7,6 +9,7 @@ import { Gauge, Sparkles, Briefcase, BookOpen, Bot, MessageSquare, GraduationCap
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { GridTrail } from '@/components/GridTrail';
 import { cn } from '@/lib/utils';
+import React from 'react';
 
 
 const features = [
@@ -64,6 +67,35 @@ const platformUsers = [
 ]
 
 export default function Home() {
+
+  React.useEffect(() => {
+    const containers = document.querySelectorAll('.glowing-card-container');
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const target = e.currentTarget as HTMLElement;
+      if (!target) return;
+
+      const rect = target.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      target.querySelectorAll<HTMLElement>('.glowing-card').forEach(card => {
+        card.style.setProperty('--px', `${x}px`);
+        card.style.setProperty('--py', `${y}px`);
+      });
+    };
+
+    containers.forEach(container => {
+      container.addEventListener('mousemove', handleMouseMove as EventListener);
+    });
+
+    return () => {
+      containers.forEach(container => {
+        container.removeEventListener('mousemove', handleMouseMove as EventListener);
+      });
+    };
+  }, []);
+
   return (
     <div className="flex flex-col bg-background text-foreground">
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
