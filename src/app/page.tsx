@@ -145,17 +145,11 @@ export default function Home() {
             <Button variant="ghost" size="icon" onClick={toggleTheme}>
                 {isDarkMode ? <Sun /> : <Moon />}
             </Button>
-            <Button asChild className="btn-next">
-              <Link href="/login">
-                <span>Log In</span>
-                <MoveRight className="chevrons" />
-              </Link>
+            <Button asChild>
+              <Link href="/login">Log In</Link>
             </Button>
-            <Button asChild className="btn-next">
-              <Link href="/signup">
-                <span>Sign Up</span>
-                <MoveRight className="chevrons" />
-              </Link>
+            <Button asChild>
+              <Link href="/signup">Sign Up</Link>
             </Button>
           </div>
         </div>
@@ -170,11 +164,8 @@ export default function Home() {
               UniHub empowers students with AI-driven tools to enhance skills, secure internships, and launch their dream careers.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-              <Button size="lg" asChild className="btn-next">
-                <Link href="/signup">
-                  <span>Get Started Free</span>
-                  <MoveRight className="chevrons" />
-                </Link>
+              <Button size="lg" asChild>
+                <Link href="/signup">Get Started Free</Link>
               </Button>
               <Button size="lg" variant="outline" asChild>
                 <Link href="#features">Learn More</Link>
