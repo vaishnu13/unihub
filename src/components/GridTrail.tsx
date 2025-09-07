@@ -28,10 +28,15 @@ export const GridTrail = () => {
             animate(
                 target,
                 {
-                    opacity: [1, 0.5, 0],
+                    transform: [
+                        "scale(1, 1)",
+                        "scale(2, 2)",
+                        "scale(1, 1)",
+                    ],
+                    opacity: [1, 0.5, 0]
                 },
                 {
-                    duration: 0.7,
+                    duration: 0.5,
                     ease: "easeOut",
                 }
             );
