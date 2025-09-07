@@ -10,6 +10,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { GridTrail } from '@/components/GridTrail';
 import { cn } from '@/lib/utils';
 import React from 'react';
+import { AnimatedHeading } from '@/components/animated-heading';
 
 
 const features = [
@@ -132,9 +133,7 @@ export default function Home() {
         <section className="relative py-20 md:py-32">
           <GridTrail />
           <div className="container text-center relative">
-            <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-              Your Bridge to a Successful Career
-            </h1>
+            <AnimatedHeading text="Your Bridge to a Successful Career" className="font-headline text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl" />
             <p className="mt-6 max-w-2xl mx-auto text-lg text-muted-foreground md:text-xl">
               UniHub empowers students with AI-driven tools to enhance skills, secure internships, and launch their dream careers.
             </p>
