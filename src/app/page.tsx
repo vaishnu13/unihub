@@ -54,7 +54,7 @@ const platformUsers = [
   },
     {
     icon: <UserCheck className="h-8 w-8 text-primary" />,
-    title: 'SEPARATE LOGIN AND SIGN UP FOR COLLEGES.',
+    title: 'For Colleges',
     description: 'Monitor placement stats, identify at-risk students, and manage campus recruitment drives effortlessly.',
     href: '/college/login',
   },
