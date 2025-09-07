@@ -31,35 +31,26 @@ import {
   Users,
   ChevronDown,
   ChevronRight,
+  ClipboardList,
+  GraduationCap,
+  Lightbulb,
+  BookCopy,
 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { Button } from './ui/button';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './ui/collapsible';
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator } from './ui/dropdown-menu';
 
 const menuItems = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutGrid },
-  { href: '/dashboard/score', label: 'Hireability Score', icon: Gauge },
-  { href: '/dashboard/learning-path', label: 'Learning Path', icon: Sparkles },
+  { href: '/dashboard/courses', label: 'Courses', icon: BookCopy },
   { href: '/dashboard/tutor', label: 'AI Tutor', icon: Bot },
+  { href: '/dashboard/practice', label: 'Practice', icon: Lightbulb },
+  { href: '/dashboard/interview-ready', label: 'Interview Ready', icon: ClipboardList },
+  { href: '/dashboard/internships/search', label: 'Internships', icon: Briefcase, badge: '5' },
+  { href: '/dashboard/portfolio', label: 'Portfolio', icon: GraduationCap },
 ];
 
-const subMenus = {
-  internships: {
-    label: 'Internships',
-    icon: Briefcase,
-    items: [
-      { href: '/dashboard/internships/search', label: 'Search' },
-      { href: '/dashboard/internships/recommendations', label: 'Recommendations' },
-    ],
-  },
-  courses: {
-    label: 'Courses',
-    icon: BookOpen,
-    items: [
-      { href: '/dashboard/courses/web-development', label: 'Web Development' },
-    ],
-  },
-};
 
 export function DashboardShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -82,71 +73,22 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
                   <Link href={item.href}>
                     <item.icon />
                     <span>{item.label}</span>
+                    {item.badge && <SidebarMenuBadge>{item.badge}</SidebarMenuBadge>}
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             ))}
-
-            <Collapsible defaultOpen={isSubMenuActive('/dashboard/internships')}>
-              <SidebarMenuItem>
-                <CollapsibleTrigger asChild>
-                  <SidebarMenuButton>
-                    <subMenus.internships.icon />
-                    <span>{subMenus.internships.label}</span>
-                    <ChevronRight className="ml-auto h-4 w-4 transition-transform group-data-[state=open]:rotate-90" />
-                  </SidebarMenuButton>
-                </CollapsibleTrigger>
-              </SidebarMenuItem>
-              <CollapsibleContent asChild>
-                <SidebarMenuSub>
-                  {subMenus.internships.items.map((item) => (
-                    <SidebarMenuSubItem key={item.href}>
-                      <SidebarMenuSubButton asChild isActive={pathname === item.href}>
-                        <Link href={item.href}>{item.label}</Link>
-                      </SidebarMenuSubButton>
-                    </SidebarMenuSubItem>
-                  ))}
-                </SidebarMenuSub>
-              </CollapsibleContent>
-            </Collapsible>
-
-            <Collapsible defaultOpen={isSubMenuActive('/dashboard/courses')}>
-              <SidebarMenuItem>
-                <CollapsibleTrigger asChild>
-                  <SidebarMenuButton>
-                    <subMenus.courses.icon />
-                    <span>{subMenus.courses.label}</span>
-                    <ChevronRight className="ml-auto h-4 w-4 transition-transform group-data-[state=open]:rotate-90" />
-                  </SidebarMenuButton>
-                </CollapsibleTrigger>
-              </SidebarMenuItem>
-              <CollapsibleContent asChild>
-                <SidebarMenuSub>
-                  {subMenus.courses.items.map((item) => (
-                    <SidebarMenuSubItem key={item.href}>
-                      <SidebarMenuSubButton asChild isActive={pathname === item.href}>
-                        <Link href={item.href}>{item.label}</Link>
-                      </SidebarMenuSubButton>
-                    </SidebarMenuSubItem>
-                  ))}
-                </SidebarMenuSub>
-              </CollapsibleContent>
-            </Collapsible>
           </SidebarMenu>
         </SidebarContent>
         <SidebarFooter>
-          <div className="flex items-center gap-3">
+           <div className="flex items-center gap-3">
             <Avatar>
               <AvatarImage src="https://picsum.photos/100" alt="User avatar" data-ai-hint="person face" />
-              <AvatarFallback>SR</AvatarFallback>
+              <AvatarFallback>VV</AvatarFallback>
             </Avatar>
             <div className="flex-1 overflow-hidden">
-              <p className="font-semibold truncate">Student Robinson</p>
-              <p className="text-xs text-muted-foreground truncate">student.r@uni.edu</p>
+              <p className="font-semibold truncate">Vaishnu Vindula</p>
             </div>
-            <Button variant="ghost" size="icon" asChild>
-                <Link href="/"><ChevronRight className="h-4 w-4" /></Link>
-            </Button>
           </div>
         </SidebarFooter>
       </Sidebar>
@@ -155,10 +97,37 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
             <SidebarTrigger className="md:hidden"/>
             <div className="flex-1">
                 <h1 className="text-lg font-semibold font-headline">
-                    {
-                        [...menuItems, ...Object.values(subMenus).flatMap(m => m.items.map(i => ({...i, label: `${m.label} / ${i.label}` })))].find(item => item.href === pathname)?.label || 'Dashboard'
-                    }
+                    Hello, vaishnu vindula
                 </h1>
+            </div>
+             <div className="flex items-center gap-4">
+                <Button variant="ghost" size="icon">
+                    <div className="h-5 w-5 bg-yellow-400 rounded-full" />
+                </Button>
+                 <Button variant="ghost" size="icon">
+                    <div className="relative">
+                        <div className="absolute -top-1 -right-1 h-2 w-2 bg-red-500 rounded-full" />
+                        <Briefcase className="h-5 w-5" />
+                    </div>
+                </Button>
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+                            <Avatar className="h-8 w-8">
+                                <AvatarImage src="https://picsum.photos/100" alt="@shadcn" data-ai-hint="person face" />
+                                <AvatarFallback>VV</AvatarFallback>
+                            </Avatar>
+                         </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem>Profile</DropdownMenuItem>
+                        <DropdownMenuItem>Settings</DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem>Logout</DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
             </div>
         </header>
         <main className="flex-1 p-4 md:p-6 lg:p-8 overflow-auto">

@@ -28,7 +28,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Progress } from '@/components/ui/progress';
-import { Loader2, Lightbulb, ShieldAlert } from 'lucide-react';
+import { Loader2, Lightbulb, ShieldAlert, Sparkles } from 'lucide-react';
 
 const formSchema = z.object({
   skills: z.string().min(10, 'Please list at least some of your skills.'),
@@ -45,9 +45,9 @@ export default function ScorePage() {
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      skills: 'JavaScript, React, Node.js, Python, SQL, Git',
-      experience: 'Summer internship at a local startup building a customer-facing web application. Contributed to frontend development using React and backend APIs with Node.js.',
-      projects: 'Personal portfolio website, a full-stack MERN blog application, a Python script for data analysis from a public API.',
+      skills: 'JavaScript, React, Teamwork',
+      experience: 'Internship in frontend development, Freelance web projects',
+      projects: 'E-commerce website with payment integration, Portfolio website to showcase my work',
     },
   });
 
@@ -65,11 +65,6 @@ export default function ScorePage() {
     }
   };
 
-  const handleRecalculate = () => {
-    setResult(null);
-    form.reset();
-  };
-
   if (isLoading || result) {
     return (
       <div className="max-w-3xl mx-auto">
@@ -77,7 +72,7 @@ export default function ScorePage() {
           <CardHeader>
             <CardTitle className="font-headline text-2xl">Your Hireability Score</CardTitle>
             <CardDescription>
-              {isLoading ? 'Analyzing your profile...' : 'Based on the information provided.'}
+              {isLoading ? 'Analyzing your profile...' : 'Based on the information you provided.'}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-8">
@@ -117,7 +112,7 @@ export default function ScorePage() {
             ) : null}
           </CardContent>
           <CardFooter className="flex-col items-stretch gap-4 md:flex-row md:justify-end">
-            <Button variant="outline" onClick={handleRecalculate} disabled={isLoading}>Recalculate</Button>
+            <Button variant="outline" onClick={() => setResult(null)} disabled={isLoading}>Assess Again</Button>
             <Button asChild>
               <a href="/dashboard/learning-path">Generate Learning Path</a>
             </Button>
@@ -128,74 +123,78 @@ export default function ScorePage() {
   }
 
   return (
-    <div className="max-w-3xl mx-auto">
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <Card>
-            <CardHeader>
-              <CardTitle className="font-headline text-2xl">Calculate Your Hireability Score</CardTitle>
-              <CardDescription>
-                Provide your details, and our AI will assess your profile to give you a hireability score.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <FormField
-                control={form.control}
-                name="skills"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Skills</FormLabel>
-                    <FormControl>
-                      <Input placeholder="e.g., JavaScript, Python, Figma" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="experience"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Work/Internship Experience</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder="Describe your roles, responsibilities, and accomplishments."
-                        className="min-h-[120px]"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="projects"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Projects</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder="Describe personal or academic projects you've worked on. What problems did they solve?"
-                        className="min-h-[120px]"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </CardContent>
-            <CardFooter>
-              <Button type="submit" disabled={isLoading}>
-                {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                Calculate Score
-              </Button>
-            </CardFooter>
-          </Card>
-        </form>
-      </Form>
+    <div className="max-w-4xl mx-auto">
+        <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                <Card>
+                <CardHeader>
+                    <CardTitle className="font-headline text-2xl">Assess Your Hireability</CardTitle>
+                    <CardDescription>
+                    Please provide detailed and specific information about the following areas to help us accurately assess your hireability.
+                    </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                    <FormField
+                        control={form.control}
+                        name="skills"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Skills</FormLabel>
+                                <FormControl>
+                                    <Textarea
+                                        placeholder="List your technical and soft skills. Enter each skill on a new line."
+                                        className="min-h-[100px]"
+                                        {...field}
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="projects"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Projects</FormLabel>
+                                <FormControl>
+                                    <Textarea
+                                        placeholder="Describe the projects you have worked on. Enter each project on a new line."
+                                        className="min-h-[120px]"
+                                        {...field}
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="experience"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Experience</FormLabel>
+                                <FormControl>
+                                    <Textarea
+                                        placeholder="Describe your relevant work experience, internships, or volunteer roles. Enter each on a new line."
+                                        className="min-h-[120px]"
+                                        {...field}
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                </CardContent>
+                <CardFooter>
+                    <Button type="submit" disabled={isLoading}>
+                    {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Sparkles className="mr-2 h-4 w-4" />}
+                        Assess My Hireability
+                    </Button>
+                </CardFooter>
+                </Card>
+            </form>
+        </Form>
     </div>
   );
 }
