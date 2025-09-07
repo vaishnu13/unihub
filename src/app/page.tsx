@@ -11,6 +11,7 @@ import { GridTrail } from '@/components/GridTrail';
 import { cn } from '@/lib/utils';
 import React from 'react';
 import { AnimatedHeading } from '@/components/animated-heading';
+import { ParticleTrail } from '@/components/ParticleTrail';
 
 
 const features = [
@@ -129,10 +130,10 @@ export default function Home() {
         </div>
       </header>
 
-      <main>
-        <section className="relative py-20 md:py-32">
-          <GridTrail />
-          <div className="container text-center relative">
+      <main className='flex-1'>
+        <section className="relative py-20 md:py-32 overflow-hidden">
+          <ParticleTrail />
+          <div className="container text-center relative z-10">
             <AnimatedHeading text="Your Bridge to a Successful Career" className="font-headline text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl" />
             <p className="mt-6 max-w-2xl mx-auto text-lg text-muted-foreground md:text-xl">
               UniHub empowers students with AI-driven tools to enhance skills, secure internships, and launch their dream careers.
@@ -258,9 +259,9 @@ export default function Home() {
         </section>
 
       </main>
-        <div className="fixed bottom-6 right-6 z-50">
-            <Button size="icon" className="rounded-full w-16 h-16 bg-purple-600 hover:bg-purple-700 shadow-lg">
-                <MessageSquare className="h-8 w-8" />
+        <div className="fixed bottom-10 right-10 z-50">
+            <Button size="icon" className="rounded-full w-20 h-20 bg-purple-600 hover:bg-purple-700 shadow-lg">
+                <MessageSquare className="h-10 w-10" />
             </Button>
         </div>
       <footer id="contact" className="border-t">
