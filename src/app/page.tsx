@@ -5,12 +5,13 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Logo } from '@/components/logo';
-import { Gauge, Sparkles, Briefcase, BookOpen, Bot, MessageSquare, GraduationCap, Building, UserCheck, User, Moon, Sun } from 'lucide-react';
+import { Gauge, Sparkles, Briefcase, BookOpen, Bot, MessageSquare, GraduationCap, Building, UserCheck, User, Moon, Sun, X, Send } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { GridTrail } from '@/components/GridTrail';
 import { cn } from '@/lib/utils';
 import React from 'react';
 import { AnimatedHeading } from '@/components/animated-heading';
+import { ChatWidget } from '@/components/chat-widget';
 
 
 const features = [
@@ -69,6 +70,7 @@ const platformUsers = [
 
 export default function Home() {
     const [isDarkMode, setIsDarkMode] = React.useState(false);
+    const [isChatOpen, setIsChatOpen] = React.useState(false);
 
     React.useEffect(() => {
         const isDark = document.documentElement.classList.contains('dark');
@@ -278,11 +280,12 @@ export default function Home() {
         </section>
 
       </main>
-        <div className="fixed bottom-10 right-10 z-50">
-            <Button size="icon" className="rounded-full w-14 h-14 bg-purple-600 hover:bg-purple-700 shadow-lg">
-                <MessageSquare className="h-8 w-8" />
+        <div className="fixed bottom-16 right-10 z-50">
+            <Button size="icon" className="rounded-full w-16 h-16 bg-primary hover:bg-primary/90 shadow-lg" onClick={() => setIsChatOpen(!isChatOpen)}>
+                {isChatOpen ? <X className="h-8 w-8" /> : <MessageSquare className="h-8 w-8" />}
             </Button>
         </div>
+        {isChatOpen && <ChatWidget onClose={() => setIsChatOpen(false)} />}
       <footer id="contact" className="border-t">
         <div className="container py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
