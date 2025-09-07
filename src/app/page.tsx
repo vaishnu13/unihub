@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Logo } from '@/components/logo';
-import { Gauge, Sparkles, Briefcase, BookOpen, Bot, MessageSquare } from 'lucide-react';
+import { Gauge, Sparkles, Briefcase, BookOpen, Bot, MessageSquare, GraduationCap } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 const features = [
@@ -29,6 +29,16 @@ const features = [
   },
 ];
 
+const partners = [
+    'DIET',
+    'Avanthi Institute',
+    'Dr. Lankapalli Bullayya College',
+    'NSRIT',
+    'Aditya Engineering College',
+    'Vignan Institute',
+    'GMR Institute of Technology'
+]
+
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground">
@@ -41,6 +51,9 @@ export default function Home() {
             </Link>
             <Link href="#about" className="text-muted-foreground transition-colors hover:text-foreground">
               About
+            </Link>
+             <Link href="#partners" className="text-muted-foreground transition-colors hover:text-foreground">
+              Partners
             </Link>
             <Link href="#team" className="text-muted-foreground transition-colors hover:text-foreground">
               Our Team
@@ -133,8 +146,35 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+         <section id="partners" className="py-20 md:py-32">
+            <div className="container">
+                <div className="text-center">
+                    <div className="inline-block rounded-full bg-primary/10 px-3 py-1 text-sm font-semibold text-primary">
+                        Our Partners
+                    </div>
+                    <h2 className="mt-4 font-headline text-3xl font-bold tracking-tight sm:text-4xl">
+                       Our Journey Begins: Working With Institutions & Employers
+                    </h2>
+                </div>
+                <div className="relative mt-16">
+                    <div className="overflow-hidden">
+                        <div className="flex gap-6 animate-infinite-scroll">
+                            {partners.concat(partners).map((partner, index) => (
+                                <Card key={index} className="flex-shrink-0 w-64">
+                                    <CardContent className="p-6 flex items-center gap-4">
+                                        <GraduationCap className="h-8 w-8 text-primary" />
+                                        <p className="font-semibold">{partner}</p>
+                                    </CardContent>
+                                </Card>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         
-        <section id="team" className="py-20 md:py-32">
+        <section id="team" className="py-20 md:py-32 bg-card">
             <div className="container">
                 <div className="text-center">
                     <div className="inline-block rounded-full bg-primary/10 px-3 py-1 text-sm font-semibold text-primary">
