@@ -36,6 +36,8 @@ import {
   GraduationCap,
   Lightbulb,
   BookCopy,
+  Sun,
+  Moon,
 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { Button } from './ui/button';
@@ -55,6 +57,14 @@ const menuItems = [
 
 export function DashboardShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const [isDarkMode, setIsDarkMode] = React.useState(true);
+
+  const toggleTheme = () => {
+    const newIsDarkMode = !isDarkMode;
+    setIsDarkMode(newIsDarkMode);
+    document.documentElement.classList.toggle('dark', newIsDarkMode);
+  };
+
 
   const isSubMenuActive = (basePath: string) => pathname.startsWith(basePath);
 
@@ -102,8 +112,8 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
                 </h1>
             </div>
              <div className="flex items-center gap-4">
-                <Button variant="ghost" size="icon">
-                    <div className="h-5 w-5 bg-yellow-400 rounded-full" />
+                <Button variant="ghost" size="icon" onClick={toggleTheme}>
+                    {isDarkMode ? <Sun /> : <Moon />}
                 </Button>
                  <Button variant="ghost" size="icon">
                     <div className="relative">
