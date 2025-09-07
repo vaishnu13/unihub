@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Logo } from '@/components/logo';
-import { Gauge, Sparkles, Briefcase, BookOpen, Bot, MessageSquare, GraduationCap, Building, UserCheck, User, Moon, Sun, X, Send } from 'lucide-react';
+import { Gauge, Sparkles, Briefcase, BookOpen, Bot, MessageSquare, GraduationCap, Building, UserCheck, User, Moon, Sun, X, Send, MoveRight } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { GridTrail } from '@/components/GridTrail';
 import { cn } from '@/lib/utils';
@@ -145,11 +145,17 @@ export default function Home() {
             <Button variant="ghost" size="icon" onClick={toggleTheme}>
                 {isDarkMode ? <Sun /> : <Moon />}
             </Button>
-            <Button variant="ghost" asChild>
-              <Link href="/login">Log In</Link>
+            <Button asChild className="btn-next">
+              <Link href="/login">
+                <span>Log In</span>
+                <MoveRight className="chevrons" />
+              </Link>
             </Button>
-            <Button asChild>
-              <Link href="/signup">Sign Up</Link>
+            <Button asChild className="btn-next">
+              <Link href="/signup">
+                <span>Sign Up</span>
+                <MoveRight className="chevrons" />
+              </Link>
             </Button>
           </div>
         </div>
@@ -164,8 +170,11 @@ export default function Home() {
               UniHub empowers students with AI-driven tools to enhance skills, secure internships, and launch their dream careers.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-              <Button size="lg" asChild>
-                <Link href="/signup">Get Started Free</Link>
+              <Button size="lg" asChild className="btn-next">
+                <Link href="/signup">
+                  <span>Get Started Free</span>
+                  <MoveRight className="chevrons" />
+                </Link>
               </Button>
               <Button size="lg" variant="outline" asChild>
                 <Link href="#features">Learn More</Link>
