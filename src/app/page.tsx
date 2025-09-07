@@ -129,7 +129,7 @@ export default function Home() {
         </div>
       </header>
 
-      <main className='flex-1'>
+      <main>
         <section className="relative py-20 md:py-32 overflow-hidden">
           <GridTrail />
           <div className="container text-center relative z-10">
@@ -158,9 +158,9 @@ export default function Home() {
                 Everything you need to go from classroom to career, powered by AI.
               </p>
             </div>
-            <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4 glowing-card-container">
+            <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
               {features.map((feature) => (
-                <Card key={feature.title} className="text-center glowing-card">
+                <Card key={feature.title} className="text-center bg-white/10 backdrop-blur-lg border border-white/20 shadow-lg rounded-2xl">
                   <CardHeader>
                     <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
                       {feature.icon}
