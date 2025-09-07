@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Logo } from '@/components/logo';
-import { Gauge, Sparkles, Briefcase, BookOpen, Bot, MessageSquare, GraduationCap, Building, UserCheck, User } from 'lucide-react';
+import { Gauge, Sparkles, Briefcase, BookOpen, Bot, MessageSquare, GraduationCap, Building, UserCheck, User, Moon, Sun } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { GridTrail } from '@/components/GridTrail';
 import { cn } from '@/lib/utils';
@@ -68,6 +68,23 @@ const platformUsers = [
 ]
 
 export default function Home() {
+    const [isDarkMode, setIsDarkMode] = React.useState(false);
+
+    React.useEffect(() => {
+        const isDark = document.documentElement.classList.contains('dark');
+        setIsDarkMode(isDark);
+    }, []);
+
+    const toggleTheme = () => {
+        const newIsDarkMode = !isDarkMode;
+        setIsDarkMode(newIsDarkMode);
+        if(newIsDarkMode) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    };
+
 
   React.useEffect(() => {
     const containers = document.querySelectorAll('.glowing-card-container');
@@ -119,6 +136,9 @@ export default function Home() {
             </Link>
           </nav>
           <div className="flex items-center gap-4 ml-auto">
+            <Button variant="ghost" size="icon" onClick={toggleTheme}>
+                {isDarkMode ? <Sun /> : <Moon />}
+            </Button>
             <Button variant="ghost" asChild>
               <Link href="/login">Log In</Link>
             </Button>
@@ -259,8 +279,8 @@ export default function Home() {
 
       </main>
         <div className="fixed bottom-10 right-10 z-50">
-            <Button size="icon" className="rounded-full w-20 h-20 bg-purple-600 hover:bg-purple-700 shadow-lg">
-                <MessageSquare className="h-10 w-10" />
+            <Button size="icon" className="rounded-full w-14 h-14 bg-purple-600 hover:bg-purple-700 shadow-lg">
+                <MessageSquare className="h-8 w-8" />
             </Button>
         </div>
       <footer id="contact" className="border-t">
