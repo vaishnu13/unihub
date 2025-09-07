@@ -3,7 +3,8 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Logo } from '@/components/logo';
-import { Gauge, Sparkles, Briefcase, BookOpen, Bot, Github, Twitter, Linkedin } from 'lucide-react';
+import { Gauge, Sparkles, Briefcase, BookOpen, Bot, MessageSquare } from 'lucide-react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 const features = [
   {
@@ -41,8 +42,8 @@ export default function Home() {
             <Link href="#about" className="text-muted-foreground transition-colors hover:text-foreground">
               About
             </Link>
-            <Link href="#contact" className="text-muted-foreground transition-colors hover:text-foreground">
-              Contact
+            <Link href="#team" className="text-muted-foreground transition-colors hover:text-foreground">
+              Our Team
             </Link>
           </nav>
           <div className="flex items-center gap-4 ml-auto">
@@ -132,19 +133,48 @@ export default function Home() {
             </div>
           </div>
         </section>
-      </main>
+        
+        <section id="team" className="py-20 md:py-32">
+            <div className="container">
+                <div className="text-center">
+                    <div className="inline-block rounded-full bg-primary/10 px-3 py-1 text-sm font-semibold text-primary">
+                        Our Team
+                    </div>
+                    <h2 className="mt-4 font-headline text-3xl font-bold tracking-tight sm:text-4xl">
+                        Meet the Founder
+                    </h2>
+                </div>
+                <div className="mt-16 flex justify-center">
+                    <Card className="w-full max-w-xs text-center">
+                        <CardContent className="p-6">
+                            <Avatar className="h-24 w-24 mx-auto mb-4">
+                                <AvatarImage src="https://picsum.photos/200" data-ai-hint="person face"/>
+                                <AvatarFallback>VV</AvatarFallback>
+                            </Avatar>
+                            <h3 className="text-lg font-bold font-headline">Vaishnu Vindula</h3>
+                            <p className="text-sm text-muted-foreground">Founder</p>
+                        </CardContent>
+                    </Card>
+                </div>
+            </div>
+        </section>
 
-      <footer id="contact" className="bg-card">
-        <div className="container py-12">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-            <Logo />
-            <p className="text-sm text-muted-foreground">
+      </main>
+        <div className="fixed bottom-4 right-4 z-50">
+            <Button size="icon" className="rounded-full w-14 h-14 bg-purple-600 hover:bg-purple-700 shadow-lg">
+                <MessageSquare className="h-6 w-6" />
+            </Button>
+        </div>
+      <footer id="contact" className="border-t">
+        <div className="container py-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+             <p className="text-sm text-muted-foreground">
               &copy; {new Date().getFullYear()} UniHub. All rights reserved.
             </p>
+            <p className="text-sm text-muted-foreground text-center">Any issues or queries? Mail us at: <a href="mailto:unihub.in@gmail.com" className="underline">unihub.in@gmail.com</a></p>
             <div className="flex gap-4">
-              <Link href="#" className="text-muted-foreground hover:text-foreground"><Twitter /></Link>
-              <Link href="#" className="text-muted-foreground hover:text-foreground"><Github /></Link>
-              <Link href="#" className="text-muted-foreground hover:text-foreground"><Linkedin /></Link>
+              <Link href="#" className="text-sm text-muted-foreground hover:text-foreground">Terms of Service</Link>
+              <Link href="#" className="text-sm text-muted-foreground hover:text-foreground">Privacy</Link>
             </div>
           </div>
         </div>
