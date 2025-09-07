@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Logo } from '@/components/logo';
 import { Gauge, Sparkles, Briefcase, BookOpen, Bot, MessageSquare, GraduationCap, Building, UserCheck, User } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { GridTrail } from '@/components/GridTrail';
 
 const features = [
   {
@@ -93,12 +94,9 @@ export default function Home() {
         </div>
       </header>
 
-      <main>
+      <main className="flex-1">
         <section className="relative py-20 md:py-32">
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 top-0 h-full w-full bg-background bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] dark:bg-[radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
-          />
+          <GridTrail />
           <div className="container text-center relative">
             <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
               Your Bridge to a Successful Career
