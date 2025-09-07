@@ -12,6 +12,7 @@ import { cn } from '@/lib/utils';
 import React from 'react';
 import { AnimatedHeading } from '@/components/animated-heading';
 import { ChatWidget } from '@/components/chat-widget';
+import { ThemeRipple } from '@/components/theme-ripple';
 
 
 const features = [
@@ -71,13 +72,15 @@ const platformUsers = [
 export default function Home() {
     const [isDarkMode, setIsDarkMode] = React.useState(false);
     const [isChatOpen, setIsChatOpen] = React.useState(false);
+    const [ripple, setRipple] = React.useState({ x: -1, y: -1, show: false });
 
     React.useEffect(() => {
         const isDark = document.documentElement.classList.contains('dark');
         setIsDarkMode(isDark);
     }, []);
 
-    const toggleTheme = () => {
+    const toggleTheme = (event: React.MouseEvent) => {
+        setRipple({ x: event.clientX, y: event.clientY, show: true });
         const newIsDarkMode = !isDarkMode;
         setIsDarkMode(newIsDarkMode);
         if(newIsDarkMode) {
@@ -118,6 +121,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col bg-background text-foreground transition-colors duration-500">
+      <ThemeRipple ripple={ripple} onAnimationComplete={() => setRipple({ ...ripple, show: false })} />
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center">
           <Link href="/">
