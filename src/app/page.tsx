@@ -44,16 +44,19 @@ const platformUsers = [
     icon: <GraduationCap className="h-8 w-8 text-primary" />,
     title: 'For Students',
     description: 'Get an AI-powered Hireability Score, personalized learning paths, and connect directly with recruiters.',
+    href: '/signup',
   },
     {
     icon: <Building className="h-8 w-8 text-primary" />,
     title: 'For Companies',
     description: 'Find top talent with advanced filters, ranked lists, and schedule campus drives with a single click.',
+    href: '/login',
   },
     {
     icon: <UserCheck className="h-8 w-8 text-primary" />,
-    title: 'For Colleges',
+    title: 'BY CLIKING THIS COLLEGE LOGIN AND SIGN UP SHOULD HAPPEN',
     description: 'Monitor placement stats, identify at-risk students, and manage campus recruitment drives effortlessly.',
+    href: '/login',
   },
 ]
 
@@ -152,7 +155,8 @@ export default function Home() {
             </div>
             <div className="mt-16 grid gap-8 md:grid-cols-3">
                 {platformUsers.map((user) => (
-                    <Card key={user.title}>
+                  <Link href={user.href} key={user.title}>
+                    <Card className="h-full">
                         <CardHeader className="flex flex-row items-center gap-4">
                             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
                                 {user.icon}
@@ -163,6 +167,7 @@ export default function Home() {
                             <p className="text-muted-foreground">{user.description}</p>
                         </CardContent>
                     </Card>
+                  </Link>
                 ))}
             </div>
           </div>
