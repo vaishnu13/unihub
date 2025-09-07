@@ -23,7 +23,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Eye } from 'lucide-react';
+import { Eye, Loader2 } from 'lucide-react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/firebase/clientApp';
 import { addUserToFirestore } from '@/firebase/firestore';
@@ -168,7 +168,7 @@ export default function SignupPage() {
             <Eye className="absolute right-3 top-9 h-5 w-5 text-muted-foreground" />
           </div>
           <Button type="submit" className="w-full" onClick={handleCreateAccount} disabled={isLoading}>
-            {isLoading ? 'Creating Account...' : 'Create an account'}
+            {isLoading ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Creating Account...</> : 'Create an account'}
           </Button>
         </div>
         <div className="mt-4 text-center text-sm">
