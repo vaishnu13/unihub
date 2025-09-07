@@ -70,7 +70,9 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
     <SidebarProvider>
       <Sidebar>
         <SidebarHeader>
-          <Logo />
+          <Link href="/">
+            <Logo />
+          </Link>
         </SidebarHeader>
         <SidebarContent>
           <SidebarMenu>

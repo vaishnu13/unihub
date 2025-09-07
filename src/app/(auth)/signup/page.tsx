@@ -26,7 +26,9 @@ export default function SignupPage() {
     <Card className="mx-auto max-w-md w-full">
        <CardHeader className="space-y-2">
         <div className="flex justify-center mb-4">
+          <Link href="/">
             <Logo />
+          </Link>
         </div>
         <CardTitle className="text-2xl font-headline text-center">Start your journey as a student with AI - UniHub.</CardTitle>
       </CardHeader>

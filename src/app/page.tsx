@@ -65,7 +65,9 @@ export default function Home() {
     <div className="flex flex-col min-h-screen bg-background text-foreground">
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center">
-          <Logo />
+          <Link href="/">
+            <Logo />
+          </Link>
           <nav className="hidden md:flex flex-1 items-center justify-center gap-6 text-sm font-medium">
             <Link href="#features" className="text-muted-foreground transition-colors hover:text-foreground">
               Features
