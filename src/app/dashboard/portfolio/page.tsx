@@ -62,7 +62,7 @@ export default function PortfolioPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-center gap-6 p-6 bg-card rounded-lg border">
         <Avatar className="h-32 w-32 border-4 border-primary/20">
-          <AvatarImage src="https://picsum.photos/200" data-ai-hint="person face" />
+          <AvatarImage src="https://placehold.co/200" data-ai-hint="person face" />
           <AvatarFallback>{avatarFallback}</AvatarFallback>
         </Avatar>
         <div className="flex-1 text-center sm:text-left">
