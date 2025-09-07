@@ -65,12 +65,22 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
   React.useEffect(() => {
     const isDark = document.documentElement.classList.contains('dark');
     setIsDarkMode(isDark);
+    // Set initial theme
+    if (isDark) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
   }, []);
 
   const toggleTheme = () => {
     const newIsDarkMode = !isDarkMode;
     setIsDarkMode(newIsDarkMode);
-    document.documentElement.classList.toggle('dark', newIsDarkMode);
+    if(newIsDarkMode) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
   };
 
 
@@ -103,9 +113,6 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
               <AvatarImage src="https://picsum.photos/100" alt="User avatar" data-ai-hint="person face" />
               <AvatarFallback>VV</AvatarFallback>
             </Avatar>
-            <div className="flex-1 overflow-hidden">
-              <p className="font-semibold truncate">Vaishnu Vindula</p>
-            </div>
           </div>
         </SidebarFooter>
       </Sidebar>
