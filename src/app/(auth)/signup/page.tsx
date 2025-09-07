@@ -58,13 +58,22 @@ export default function SignupPage() {
                 <SelectValue placeholder="Select your college" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="diet">DIET</SelectItem>
-                <SelectItem value="avanthi">Avanthi Institute</SelectItem>
+                <SelectItem value="anits">Anil Neerukonda Institute of Technology and Sciences (ANITS)</SelectItem>
+                <SelectItem value="viit">Vignan's Institute of Information Technology (VIIT)</SelectItem>
+                <SelectItem value="view">Vignan's Institute of Engineering for Women</SelectItem>
+                <SelectItem value="raghu">Raghu Engineering College (Autonomous)</SelectItem>
+                <SelectItem value="diet">Dadi Institute of Engineering and Technology (DIET)</SelectItem>
+                <SelectItem value="viet">Visakha Institute of Engineering & Technology (VIET)</SelectItem>
+                <SelectItem value="chaitanya">Chaitanya Engineering College</SelectItem>
+                <SelectItem value="avanthi">Avanthi Institute of Engineering and Technology</SelectItem>
+                <SelectItem value="bits">BABA Institute of Technology and Sciences (BITS)</SelectItem>
                 <SelectItem value="bullayya">Dr. Lankapalli Bullayya College</SelectItem>
-                <SelectItem value="nsrit">NSRIT</SelectItem>
-                <SelectItem value="aditya">Aditya Engineering College</SelectItem>
-                <SelectItem value="vignan">Vignan Institute</SelectItem>
-                <SelectItem value="gmrit">GMR Institute of Technology</SelectItem>
+                <SelectItem value="saiganapathi">Sai Ganapathi Engineering College</SelectItem>
+                <SelectItem value="sanketika">Sanketika Vidya Parishad Engineering College</SelectItem>
+                <SelectItem value="giits">Gonna Institute of Information Technology & Sciences (GIITS)</SelectItem>
+                <SelectItem value="nsrit">Nadimpalli Satyanarayana Raju Institute of Technology (NSRIT)</SelectItem>
+                <SelectItem value="alameer">Al Ameer College of Engineering and Information Technology</SelectItem>
+                <SelectItem value="behara">Behara College of Engineering and Technology</SelectItem>
               </SelectContent>
             </Select>
           </div>
