@@ -38,6 +38,9 @@ import {
   BookCopy,
   Sun,
   Moon,
+  Bell,
+  Mic,
+  BrainCircuit,
 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { Button } from './ui/button';
@@ -45,13 +48,13 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './ui/collap
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator } from './ui/dropdown-menu';
 
 const menuItems = [
-  { href: '/dashboard', label: 'Dashboard', icon: LayoutGrid },
+  { href: '/dashboard', label: 'Dashboard', icon: GraduationCap },
   { href: '/dashboard/courses', label: 'Courses', icon: BookCopy },
   { href: '/dashboard/tutor', label: 'AI Tutor', icon: Bot },
-  { href: '/dashboard/practice', label: 'Practice', icon: Lightbulb },
-  { href: '/dashboard/interview-ready', label: 'Interview Ready', icon: ClipboardList },
+  { href: '/dashboard/practice', label: 'Practice', icon: BrainCircuit },
+  { href: '/dashboard/interview-ready', label: 'Interview Ready', icon: Mic },
   { href: '/dashboard/internships/search', label: 'Internships', icon: Briefcase, badge: '5' },
-  { href: '/dashboard/portfolio', label: 'Portfolio', icon: GraduationCap },
+  { href: '/dashboard/portfolio', label: 'Portfolio', icon: Users },
 ];
 
 
@@ -71,18 +74,16 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider>
       <Sidebar>
-        <SidebarHeader>
-          <Link href="/">
-            <Logo />
-          </Link>
+        <SidebarHeader className="p-4">
+          <Logo className="text-2xl" iconClassName="h-8 w-8" />
         </SidebarHeader>
         <SidebarContent>
           <SidebarMenu>
             {menuItems.map((item) => (
-              <SidebarMenuItem key={item.href}>
-                <SidebarMenuButton asChild isActive={pathname === item.href}>
+              <SidebarMenuItem key={item.href} className="px-2">
+                <SidebarMenuButton asChild isActive={pathname === item.href} size="lg" className="text-base font-medium">
                   <Link href={item.href}>
-                    <item.icon />
+                    <item.icon className="h-5 w-5" />
                     <span>{item.label}</span>
                     {item.badge && <SidebarMenuBadge>{item.badge}</SidebarMenuBadge>}
                   </Link>
@@ -92,7 +93,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
           </SidebarMenu>
         </SidebarContent>
         <SidebarFooter>
-           <div className="flex items-center gap-3">
+           <div className="flex items-center gap-3 p-2">
             <Avatar>
               <AvatarImage src="https://picsum.photos/100" alt="User avatar" data-ai-hint="person face" />
               <AvatarFallback>VV</AvatarFallback>
@@ -104,27 +105,22 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
         </SidebarFooter>
       </Sidebar>
       <SidebarInset>
-        <header className="flex h-16 items-center gap-4 border-b bg-card px-6">
+        <header className="flex h-16 items-center gap-4 border-b bg-background px-6">
             <SidebarTrigger className="md:hidden"/>
-            <div className="flex-1">
-                <h1 className="text-lg font-semibold font-headline">
-                    Hello, vaishnu vindula
-                </h1>
-            </div>
-             <div className="flex items-center gap-4">
+            <div className="flex-1" />
+             <div className="flex items-center gap-2">
                 <Button variant="ghost" size="icon" onClick={toggleTheme}>
                     {isDarkMode ? <Sun /> : <Moon />}
                 </Button>
                  <Button variant="ghost" size="icon">
                     <div className="relative">
-                        <div className="absolute -top-1 -right-1 h-2 w-2 bg-red-500 rounded-full" />
-                        <Briefcase className="h-5 w-5" />
+                        <Bell className="h-5 w-5" />
                     </div>
                 </Button>
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-                            <Avatar className="h-8 w-8">
+                            <Avatar className="h-9 w-9">
                                 <AvatarImage src="https://picsum.photos/100" alt="@shadcn" data-ai-hint="person face" />
                                 <AvatarFallback>VV</AvatarFallback>
                             </Avatar>
