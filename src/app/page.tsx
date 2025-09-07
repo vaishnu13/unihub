@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Logo } from '@/components/logo';
-import { Gauge, Sparkles, Briefcase, BookOpen, Bot, MessageSquare, GraduationCap } from 'lucide-react';
+import { Gauge, Sparkles, Briefcase, BookOpen, Bot, MessageSquare, GraduationCap, Building, UserCheck } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 const features = [
@@ -37,6 +37,24 @@ const partners = [
     'Aditya Engineering College',
     'Vignan Institute',
     'GMR Institute of Technology'
+]
+
+const platformUsers = [
+  {
+    icon: <GraduationCap className="h-8 w-8 text-primary" />,
+    title: 'For Students',
+    description: 'Get an AI-powered Hireability Score, personalized learning paths, and connect directly with recruiters.',
+  },
+    {
+    icon: <Building className="h-8 w-8 text-primary" />,
+    title: 'For Companies',
+    description: 'Find top talent with advanced filters, ranked lists, and schedule campus drives with a single click.',
+  },
+    {
+    icon: <UserCheck className="h-8 w-8 text-primary" />,
+    title: 'For Colleges',
+    description: 'Monitor placement stats, identify at-risk students, and manage campus recruitment drives effortlessly.',
+  },
 ]
 
 export default function Home() {
@@ -123,26 +141,29 @@ export default function Home() {
         </section>
 
         <section id="about" className="py-20 md:py-32">
-          <div className="container grid gap-12 md:grid-cols-2 items-center">
-            <div>
-              <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl">
-                From University Halls to Industry Leader
-              </h2>
-              <p className="mt-6 text-lg text-muted-foreground">
-                UniHub was born from a simple idea: to bridge the gap between academic learning and professional success. We provide students with the tools and insights needed to thrive in today's competitive job market.
-              </p>
-              <p className="mt-4 text-lg text-muted-foreground">
-                Our platform uses cutting-edge AI to deliver personalized guidance, ensuring every student has a clear path to achieving their career goals.
-              </p>
+          <div className="container">
+            <div className="text-center">
+                <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl">
+                    A Platform for Everyone
+                </h2>
+                <p className="mt-4 max-w-3xl mx-auto text-lg text-muted-foreground">
+                    Tailored dashboards and powerful tools for students, colleges, and companies to thrive in the modern talent landscape.
+                </p>
             </div>
-            <div className="w-full h-80 relative rounded-lg overflow-hidden">
-               <Image
-                src="https://picsum.photos/600/400"
-                alt="Students collaborating"
-                data-ai-hint="students collaborating"
-                fill
-                className="object-cover"
-                />
+            <div className="mt-16 grid gap-8 md:grid-cols-3">
+                {platformUsers.map((user) => (
+                    <Card key={user.title}>
+                        <CardHeader className="flex flex-row items-center gap-4">
+                            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+                                {user.icon}
+                            </div>
+                            <CardTitle className="font-headline text-xl">{user.title}</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <p className="text-muted-foreground">{user.description}</p>
+                        </CardContent>
+                    </Card>
+                ))}
             </div>
           </div>
         </section>
