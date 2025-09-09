@@ -59,7 +59,6 @@ const menuItems = [
     ]
   },
   { href: '/dashboard/portfolio', label: 'Profile', icon: User },
-  { href: '/dashboard/practice', label: 'Practice Zone', icon: BrainCircuit },
 ];
 
 
