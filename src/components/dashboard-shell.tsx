@@ -24,24 +24,19 @@ import {
 import { Logo } from '@/components/logo';
 import {
   LayoutGrid,
-  Gauge,
   Sparkles,
   Bot,
   Briefcase,
   BookOpen,
-  Search,
   Users,
   ChevronDown,
   ChevronRight,
-  ClipboardList,
-  GraduationCap,
-  Lightbulb,
-  BookCopy,
   Sun,
   Moon,
   Bell,
   Mic,
   BrainCircuit,
+  User,
 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { Button } from './ui/button';
@@ -52,6 +47,8 @@ const menuItems = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutGrid },
   { href: '/dashboard/learning-path', label: 'Learning Path', icon: Sparkles },
   { href: '/dashboard/courses', label: 'Courses', icon: BookOpen },
+  { href: '/dashboard/tutor', label: 'AI Tutor', icon: Bot },
+  { href: '/dashboard/interview-ready', label: 'Interview Ready', icon: Mic },
   { 
     href: '/dashboard/internships', 
     label: 'Internships', 
@@ -61,9 +58,8 @@ const menuItems = [
       { href: '/dashboard/internships/recommendations', label: 'AI Recommendations' },
     ]
   },
-  { href: '/dashboard/tutor', label: 'AI Tutor', icon: Bot },
+  { href: '/dashboard/portfolio', label: 'Profile', icon: User },
   { href: '/dashboard/practice', label: 'Practice Zone', icon: BrainCircuit },
-  { href: '/dashboard/interview-ready', label: 'Interview Ready', icon: Mic },
 ];
 
 
