@@ -22,7 +22,7 @@ export function ChatWidget({ onClose }: ChatWidgetProps) {
     {
       role: 'assistant',
       content:
-        "Hello! I'm the UniHub assistant. How can I help you today? You can ask me about our features or any login/signup issues.",
+        "Hello! I'm the UniHub assistant. How can I help you today? You can ask me about our features, or any login/signup issues.",
     },
   ]);
   const [input, setInput] = useState('');
