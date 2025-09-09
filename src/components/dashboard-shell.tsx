@@ -143,7 +143,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="w-full justify-start items-center gap-3 h-auto p-2">
                   <Avatar className="h-9 w-9">
-                      <AvatarImage src="https://picsum.photos/100" alt={studentName} data-ai-hint="person face" />
+                      <AvatarImage src="" alt={studentName} data-ai-hint="person face" />
                       <AvatarFallback>{avatarFallback}</AvatarFallback>
                   </Avatar>
                   <div className="flex-1 text-left overflow-hidden">
@@ -188,7 +188,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
                 <Button variant="ghost" className="relative h-8 w-8 rounded-full" asChild>
                   <Link href="/dashboard/portfolio">
                     <Avatar className="h-9 w-9">
-                        <AvatarImage src="https://picsum.photos/100" alt={studentName} data-ai-hint="person face" />
+                        <AvatarImage src="" alt={studentName} data-ai-hint="person face" />
                         <AvatarFallback>{avatarFallback}</AvatarFallback>
                     </Avatar>
                   </Link>
