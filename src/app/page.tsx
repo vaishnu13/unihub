@@ -10,6 +10,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { GridTrail } from '@/components/GridTrail';
 import { cn } from '@/lib/utils';
 import React from 'react';
+import { motion } from 'framer-motion';
 import { AnimatedHeading } from '@/components/animated-heading';
 import { ChatWidget } from '@/components/chat-widget';
 import { ThemeWipe } from '@/components/theme-wipe';
@@ -186,17 +187,23 @@ export default function Home() {
             </div>
             <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
               {features.map((feature) => (
-                <Card key={feature.title} className="text-center bg-white/10 backdrop-blur-lg border border-white/20 shadow-lg rounded-2xl">
-                  <CardHeader>
-                    <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
-                      {feature.icon}
-                    </div>
-                    <CardTitle className="mt-4 font-headline">{feature.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground">{feature.description}</p>
-                  </CardContent>
-                </Card>
+                <motion.div
+                    key={feature.title}
+                    whileHover={{ y: -8, scale: 1.05 }}
+                    transition={{ type: 'spring', stiffness: 300 }}
+                >
+                    <Card className="text-center bg-white/10 backdrop-blur-lg border border-white/20 shadow-lg rounded-2xl h-full">
+                    <CardHeader>
+                        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
+                        {feature.icon}
+                        </div>
+                        <CardTitle className="mt-4 font-headline">{feature.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <p className="text-muted-foreground">{feature.description}</p>
+                    </CardContent>
+                    </Card>
+                </motion.div>
               ))}
             </div>
           </div>
