@@ -50,7 +50,6 @@ import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuIte
 
 const menuItems = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutGrid },
-  { href: '/dashboard/score', label: 'Hireability Score', icon: Gauge },
   { href: '/dashboard/learning-path', label: 'Learning Path', icon: Sparkles },
   { href: '/dashboard/courses', label: 'Courses', icon: BookOpen },
   { 
