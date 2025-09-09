@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Logo } from '@/components/logo';
-import { Gauge, Sparkles, Briefcase, BookOpen, Bot, MessageSquare, GraduationCap, Building, UserCheck, User, Moon, Sun, X, Send, MoveRight } from 'lucide-react';
+import { Gauge, Sparkles, Briefcase, BookOpen, Bot, MessageSquare, GraduationCap, Building, UserCheck, User, Moon, Sun, X, Send, MoveRight, History } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { GridTrail } from '@/components/GridTrail';
 import { cn } from '@/lib/utils';
@@ -28,9 +28,9 @@ const features = [
     description: 'Receive a custom learning path with courses and projects to boost your skills.',
   },
   {
-    icon: <Briefcase className="h-8 w-8 text-primary" />,
-    title: 'Internship Matching',
-    description: 'Discover internship opportunities perfectly tailored to your profile and ambitions.',
+    icon: <History className="h-8 w-8 text-primary" />,
+    title: 'Student Profile History',
+    description: 'Track your skill development and project history over time.',
   },
   {
     icon: <Bot className="h-8 w-8 text-primary" />,
