@@ -162,7 +162,7 @@ export default function Home() {
           <div className="container text-center relative z-10">
             <AnimatedHeading text="Your Bridge to a Successful Career" className="font-headline text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl" />
             <p className="mt-6 max-w-2xl mx-auto text-lg text-muted-foreground md:text-xl">
-              UniHub empowers students with AI-driven tools to enhance skills, secure internships, and launch their dream careers.
+              UniHub connects students, colleges, and companies and bridges the gap.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <Button size="lg" asChild>
