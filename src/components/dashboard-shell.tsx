@@ -49,13 +49,22 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './ui/collap
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator } from './ui/dropdown-menu';
 
 const menuItems = [
-  { href: '/dashboard', label: 'Dashboard', icon: GraduationCap },
-  { href: '/dashboard/courses', label: 'Courses', icon: BookCopy },
+  { href: '/dashboard', label: 'Dashboard', icon: LayoutGrid },
+  { href: '/dashboard/score', label: 'Hireability Score', icon: Gauge },
+  { href: '/dashboard/learning-path', label: 'Learning Path', icon: Sparkles },
+  { href: '/dashboard/courses', label: 'Courses', icon: BookOpen },
+  { 
+    href: '/dashboard/internships', 
+    label: 'Internships', 
+    icon: Briefcase,
+    subItems: [
+      { href: '/dashboard/internships/search', label: 'Search' },
+      { href: '/dashboard/internships/recommendations', label: 'AI Recommendations' },
+    ]
+  },
   { href: '/dashboard/tutor', label: 'AI Tutor', icon: Bot },
-  { href: '/dashboard/practice', label: 'Practice', icon: BrainCircuit },
+  { href: '/dashboard/practice', label: 'Practice Zone', icon: BrainCircuit },
   { href: '/dashboard/interview-ready', label: 'Interview Ready', icon: Mic },
-  { href: '/dashboard/internships/search', label: 'Internships', icon: Briefcase, badge: '5' },
-  { href: '/dashboard/portfolio', label: 'Portfolio', icon: Users },
 ];
 
 
@@ -94,20 +103,71 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
         <SidebarContent>
           <SidebarMenu>
             {menuItems.map((item) => (
-              <SidebarMenuItem key={item.href} className="px-2">
-                <SidebarMenuButton asChild isActive={pathname.startsWith(item.href)} size="lg" className="text-base font-medium">
-                  <Link href={item.href}>
-                    <item.icon className="h-5 w-5" />
-                    <span>{item.label}</span>
-                    {item.badge && <SidebarMenuBadge>{item.badge}</SidebarMenuBadge>}
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
+              item.subItems ? (
+                <Collapsible key={item.href} defaultOpen={isSubMenuActive(item.href)}>
+                  <SidebarMenuItem className="px-2">
+                    <CollapsibleTrigger asChild>
+                      <SidebarMenuButton size="lg" className="text-base font-medium justify-between">
+                          <div className="flex items-center gap-2">
+                            <item.icon className="h-5 w-5" />
+                            <span>{item.label}</span>
+                          </div>
+                          <ChevronDown className="h-4 w-4 transition-transform [&[data-state=open]]:rotate-180" />
+                      </SidebarMenuButton>
+                    </CollapsibleTrigger>
+                  </SidebarMenuItem>
+                  <CollapsibleContent>
+                    <SidebarMenuSub>
+                      {item.subItems.map((subItem) => (
+                         <SidebarMenuSubItem key={subItem.href}>
+                            <SidebarMenuSubButton asChild isActive={pathname === subItem.href}>
+                               <Link href={subItem.href}>
+                                  <span>{subItem.label}</span>
+                               </Link>
+                           </SidebarMenuSubButton>
+                        </SidebarMenuSubItem>
+                      ))}
+                    </SidebarMenuSub>
+                  </CollapsibleContent>
+                </Collapsible>
+              ) : (
+                <SidebarMenuItem key={item.href} className="px-2">
+                  <SidebarMenuButton asChild isActive={pathname.startsWith(item.href)} size="lg" className="text-base font-medium">
+                    <Link href={item.href}>
+                      <item.icon className="h-5 w-5" />
+                      <span>{item.label}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              )
             ))}
           </SidebarMenu>
         </SidebarContent>
         <SidebarFooter>
            <div className="flex items-center gap-3 p-2">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="w-full justify-start items-center gap-3 h-auto p-2">
+                  <Avatar className="h-9 w-9">
+                      <AvatarImage src="https://picsum.photos/100" alt={studentName} data-ai-hint="person face" />
+                      <AvatarFallback>{avatarFallback}</AvatarFallback>
+                  </Avatar>
+                  <div className="flex-1 text-left overflow-hidden">
+                    <p className="font-semibold truncate">{studentName}</p>
+                    <p className="text-xs text-muted-foreground truncate">{user?.email}</p>
+                  </div>
+                  <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild><Link href="/dashboard/portfolio">Profile</Link></DropdownMenuItem>
+                <DropdownMenuItem>Settings</DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild><Link href="/">Logout</Link></DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </SidebarFooter>
       </Sidebar>
@@ -125,26 +185,20 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
                  <Button variant="ghost" size="icon">
                     <div className="relative">
                         <Bell className="h-5 w-5" />
+                        <span className="absolute -top-1 -right-1 flex h-3 w-3">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+                        </span>
                     </div>
                 </Button>
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-                            <Avatar className="h-9 w-9">
-                                <AvatarImage src="https://picsum.photos/100" alt={studentName} data-ai-hint="person face" />
-                                <AvatarFallback>{avatarFallback}</AvatarFallback>
-                            </Avatar>
-                         </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem asChild><Link href="/dashboard/portfolio">Profile</Link></DropdownMenuItem>
-                        <DropdownMenuItem>Settings</DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem asChild><Link href="/">Logout</Link></DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
+                <Button variant="ghost" className="relative h-8 w-8 rounded-full" asChild>
+                  <Link href="/dashboard/portfolio">
+                    <Avatar className="h-9 w-9">
+                        <AvatarImage src="https://picsum.photos/100" alt={studentName} data-ai-hint="person face" />
+                        <AvatarFallback>{avatarFallback}</AvatarFallback>
+                    </Avatar>
+                  </Link>
+                </Button>
             </div>
         </header>
         <main className="flex-1 p-4 md:p-6 lg:p-8 overflow-auto">
