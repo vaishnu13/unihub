@@ -19,13 +19,15 @@ import { ThemeWipe } from '@/components/theme-wipe';
 const features = [
   {
     icon: <Gauge className="h-8 w-8 text-primary" />,
-    title: 'Hireability Score',
-    description: 'Get a data-driven score on your employability and identify areas for improvement.',
+    title: 'AI Interviewer',
+    description: 'Practice real-time technical and behavioral interviews with our AI agent.',
+    href: '/ai-interviewer',
   },
   {
     icon: <Sparkles className="h-8 w-8 text-primary" />,
-    title: 'Personalized Learning',
-    description: 'Receive a custom learning path with courses and projects to boost your skills.',
+    title: 'Serverless Attendance',
+    description: 'Track and manage student attendance seamlessly with our highly scalable serverless system.',
+    href: '/attendance',
   },
   {
     icon: <History className="h-8 w-8 text-primary" />,
@@ -53,7 +55,7 @@ const platformUsers = [
   {
     icon: <GraduationCap className="h-8 w-8 text-primary" />,
     title: 'For Students',
-    description: 'Get an AI-powered Hireability Score, personalized learning paths, and connect directly with recruiters.',
+    description: 'Get an AI Interviewer experience, personalized learning paths, and connect directly with recruiters.',
     href: '/signup',
   },
     {
@@ -186,13 +188,9 @@ export default function Home() {
               </p>
             </div>
             <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-              {features.map((feature) => (
-                <motion.div
-                    key={feature.title}
-                    whileHover={{ y: -8, scale: 1.05 }}
-                    transition={{ type: 'spring', stiffness: 300 }}
-                >
-                    <Card className="text-center bg-white/10 backdrop-blur-lg border border-white/20 shadow-lg rounded-2xl h-full">
+              {features.map((feature) => {
+                const cardContent = (
+                    <Card className="text-center bg-white/10 backdrop-blur-lg border border-white/20 shadow-lg rounded-2xl h-full cursor-pointer hover:bg-white/20 transition-colors">
                     <CardHeader>
                         <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
                         {feature.icon}
@@ -203,8 +201,24 @@ export default function Home() {
                         <p className="text-muted-foreground">{feature.description}</p>
                     </CardContent>
                     </Card>
-                </motion.div>
-              ))}
+                );
+
+                return (
+                  <motion.div
+                      key={feature.title}
+                      whileHover={{ y: -8, scale: 1.05 }}
+                      transition={{ type: 'spring', stiffness: 300 }}
+                  >
+                    {feature.href ? (
+                      <Link href={feature.href} className="block h-full">
+                        {cardContent}
+                      </Link>
+                    ) : (
+                      <div className="h-full">{cardContent}</div>
+                    )}
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </section>
