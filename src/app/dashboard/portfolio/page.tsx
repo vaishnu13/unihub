@@ -1,6 +1,5 @@
 'use client';
 
-import { useUser } from '@/context/UserContext';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -44,7 +43,7 @@ const sections = [
 ];
 
 export default function PortfolioPage() {
-  const { user } = useUser();
+  const user = { firstName: 'Demo', lastName: 'User', email: 'demo@unihub.com', college: 'UniHub College', education: 'btech' };
 
   const studentName = user ? `${user.firstName} ${user.lastName}` : 'Student Name';
   const avatarFallback = user

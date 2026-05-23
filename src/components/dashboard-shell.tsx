@@ -3,7 +3,6 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useUser } from '@/context/UserContext';
 
 import {
   SidebarProvider,
@@ -64,7 +63,7 @@ const menuItems = [
 
 export function DashboardShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const { user } = useUser();
+  const user = { firstName: 'Demo', lastName: 'User', email: 'demo@unihub.com' };
   const [isDarkMode, setIsDarkMode] = React.useState(true);
 
   React.useEffect(() => {
