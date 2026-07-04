@@ -1,28 +1,41 @@
-# Welcome to Antigravity!
+# UniHub
 
-Welcome to your new developer home! Your Firebase Studio project has been successfully migrated to Antigravity.
+UniHub is your all-in-one platform for career success, offering personalized learning paths, internship recommendations, and AI-powered tutoring.
 
-Antigravity is our next-generation, agent-first IDE designed for high-velocity, autonomous development. Because Antigravity runs locally on your machine, you now have access to powerful local workflows and fully integrated AI editing capabilities that go beyond a cloud-based web IDE.
+## Overview
+This repository contains the purely static Next.js frontend UI for UniHub. The backend logic (including Firebase Auth and Firestore) has been stripped out, making this a lightweight, highly responsive frontend-only application ready to be deployed on any static web host, such as Vercel or GitHub Pages.
+
+## Tech Stack
+- **Framework:** [Next.js](https://nextjs.org/) (Static Export)
+- **UI Library:** [React](https://react.dev/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Components:** [Radix UI](https://www.radix-ui.com/) & [shadcn/ui](https://ui.shadcn.com/)
+- **Icons:** [Lucide React](https://lucide.dev/)
 
 ## Getting Started
-- **Run Locally**: Use the **Run and Debug** menu on the left sidebar to start your local development server.
-  - Or in a terminal run `npm run dev` and visit `http://localhost:9002`.
-- **Deploy**: You can deploy your changes to Firebase App Hosting by using the integrated terminal and standard Firebase CLI commands, just as you did in Firebase Studio.
-- **Cleanup**: Cleanup unused artifacts with the @cleanup workflow.
 
-Enjoy the next era of AI-driven development!
+First, ensure you have the dependencies installed:
 
-File any bugs at https://github.com/firebase/firebase-tools/issues
+```bash
+npm install
+```
 
-**Firebase Studio Export Date:** 2026-05-13
+Then, run the development server:
 
+```bash
+npm run dev
+```
 
----
+Open [http://localhost:9002](http://localhost:9002) in your browser to view the application locally.
 
-## Previous README.md contents:
+## Deployment
 
-# Firebase Studio
+Since this project has been converted to a static UI, it can easily be deployed on **Vercel**:
 
-This is a NextJS starter in Firebase Studio.
+1. Push your code to your GitHub repository.
+2. Sign in to [Vercel](https://vercel.com/) and create a new Project.
+3. Import this repository.
+4. Vercel will automatically detect the Next.js setup. Click **Deploy**.
 
-To get started, take a look at src/app/page.tsx.
+## License
+MIT License
